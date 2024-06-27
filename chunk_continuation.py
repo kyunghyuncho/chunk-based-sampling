@@ -18,7 +18,7 @@ def chunk_continuation(model,
     # compute the log-probabilities of all candidates within `candidate_set` given the `prefix`'s `past_key_values`.
     log_probs = []
 
-    for candidate in tqdm(candidate_set):
+    for candidate in candidate_set:
         # encode `candidate`
         candidate_ids = tokenizer(candidate, return_tensors="pt").input_ids
 
@@ -45,4 +45,4 @@ def chunk_continuation(model,
     if verbose:
         print(f"Sampled candidate: {candidate_set[sampled_cand]}")
 
-    return f'{prefix} {candidate_set[sampled_cand]}{suffix}'
+    return f'{prefix.strip()} {candidate_set[sampled_cand].strip()}{suffix.strip()}'
